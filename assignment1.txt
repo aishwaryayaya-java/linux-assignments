@@ -1,0 +1,21 @@
+1) List out 5 files in your system which consuming most of the disk space
+$sudo du -ah / | sort -rh | head -n 5
+
+2) Create one common folder in such a way that anyone can create files inside that 
+independently and should not be able to delete other users files from that common 
+folder.
+$sudo mkdir /common
+$sudo chown root:root /common
+$sudo chmod 1777 /common
+
+3) Create user name "shubham" and add that user in the group "adm"
+a) Create folder /data , change owner and group as "root:adm
+b) Change /data permission such a way that user can able to write data in this folder 
+and ownership of files or folder which you creates in this folder should be same as parent 
+folder i.e /data folder permission (root:adm)
+$sudo useradd -m -s /bin/bash shubham
+$sudo usermod -aG adm shubham
+$sudo mkdir /data
+$sudo chown root:adm /data
+$sudo chmod 2775 /data
+
