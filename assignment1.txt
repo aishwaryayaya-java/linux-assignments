@@ -1,11 +1,15 @@
-1) Setup additional swap space in the system to solve low memory issue. The swap 
-which you added should be available post reboot.
-sudo fallocate -l 2G /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-sudo swapon --show
+1)	List out highest priority process in the system
+$ps -eo pid,comm,pri,nice --sort=-pri | head -n 1
 
-2) Find out the number of process is in run queue and blocking queue.
-$ vmstat
+2)	Open terminal with 2 tabs or sessions
+ a) run command "vmstat 1" 
+ b) switch to another tab, pause running vmstat command for few seconds and resume it again use appropriate SIGNALS to do this activity.
+vmstat 1
+pgrep vmstat
+kill -SIGSTOP 1891
+kill -SIGCONT 1891
 
+
+
+3) Find the process which is sleeping in "wait" state.
+$ps -eo pid,comm,state | grep -w "D"
