@@ -1,15 +1,11 @@
-1) Create user "nikhil" with home directory set as "/home/nikhil"
-a) nikhil user should have "/bin/sh" shell for his environment
-b) His password should expire in 9 days and 2 days before password expiry, he 
-should get warning. User account must expire in 1 month from creation date
-c) Give him root privileges to start/stop cron daemon.
-sudo useradd -m -d /home/nikhil -s /bin/sh nikhil
-sudo chage -M 9 -W 2 nikhil
-sudo chage -E 2024-9-13 nikhil
-sudo visudo
-nikhil ALL=NOPASSWD: /usr/sbin/service cron start, /usr/sbin/service cron stop
+1) Setup additional swap space in the system to solve low memory issue. The swap 
+which you added should be available post reboot.
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo swapon --show
 
-2) Inside folder "/" , create new home directory as "nikhil" (/nikhil) and setup this folder 
-as a home directory for user "nikhil
-sudo usermod -d /nikhil -m nikhil
+2) Find out the number of process is in run queue and blocking queue.
+$ vmstat
 
